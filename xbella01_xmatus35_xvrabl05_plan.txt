@@ -53,7 +53,6 @@
 	Trello: 
 		Trello budeme používať na plánovanie úloh a sledovanie dodržania deadlinov.
 
-
 4. Zvolený systém pre správu verzí a hosting
 
 	- Systém pre správu verzí: Git
