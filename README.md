@@ -1,5 +1,5 @@
-# IVS-2021-22
-# IVS-PROJEKT-2
+# IVS PROJEKT-2
+## 2021 - 2022
 Platforms
 ---------
 
