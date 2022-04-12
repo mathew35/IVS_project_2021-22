@@ -8,6 +8,7 @@ Windows 64bit
 Authors
 ------
 
+To je jedno
 	- xbella01 Magdaléna Bellayová
 	
 	- xmatus35 Adrián Matušík 
@@ -17,4 +18,4 @@ Authors
 License
 -------
 
-Kód je vydaný pod MIT licenciou. Detaily v súbore LICENSE.
+Tento program je poskytovaný pod [GNU General Public Licence v3.0](LICENCE).
