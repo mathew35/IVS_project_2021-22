@@ -9,6 +9,7 @@ Authors
 ------
 
 To je jedno
+
 	- xbella01 Magdaléna Bellayová
 	
 	- xmatus35 Adrián Matušík 
