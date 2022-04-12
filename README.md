@@ -16,3 +16,5 @@ Authors
 
 License
 -------
+
+Kód je vydaný pod MIT licenciou. Detaily v súbore LICENSE.
