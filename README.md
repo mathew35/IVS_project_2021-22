@@ -19,4 +19,4 @@ To je jedno
 License
 -------
 
-Tento program je poskytovaný pod [GNU General Public Licence v3.0](LICENCE).
+Tento program je poskytovaný pod GNU General Public Licence v3.0.
