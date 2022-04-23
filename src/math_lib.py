@@ -1,55 +1,94 @@
+##
+# @file math_lib.py
+# @brief mathematical library
+# @author Magdaléna Bellayová
+# @date April 2022
+##
+
 import math
 
 pi = math.pi
-e = math.e
 
-def sinus(x):
-    return round(math.sin(x), 9)
 
-def kosinus(x):
-    return round(math.cos(x), 9)
+def add(x, y):
+    return round(x + y, 5)
 
-def tangens(x):
-    return round(math.tan(x), 9)
 
-def logaritmus(x):
-    return round((math.log(x, 10)), 9)
+def sub(x, y):
+    return round(x - y, 5)
 
-def ln_logaritmus(x):
-    return round((math.log(x, e)), 9)
 
-def x_na_druhu(x):
-    return round((x ** x), 9)
+def mul(x, y):
+    return round(x * y, 5)
 
-def jedna_deleno_x(x):
-    return round((1 / x), 9)
 
-def absolutna_hodnota(x):
-    return round((math.fabs(x)), 9)
+def div(x, y):
+    if y == 0:
+        raise ZeroDivisionError
+    return round(x / y, 5)
 
-def x_na_tretiu(x):
-    return round((x ** x ** x), 9)
 
-def desat_na_x(x):
-    return round((10 ** x), 9)
+def mod(x, y):
+    if y == 0:
+        raise ZeroDivisionError
+    if isinstance(x, float):
+        raise ValueError
+    if isinstance(y, float):
+        raise ValueError
+    if x >= 0 and y > 0:
+        return round(x % y, 5)
+    if x <= 0 and y < 0:
+        return round(x % y, 5)
+    if x < 0:
+        return -(round((-x) % y, 5))
+    if y < 0:
+        return round(x % (-y), 5)
 
-def odmocnina(x):
-    return round(math.sqrt(x), 9)
 
-def modulo(x, y):
-    return round(x % y, 9)
+def pow(x, y):
+    if y < 0:
+        raise ValueError
+    if isinstance(y, float):
+        raise ValueError
+    return round(x**y, 5)
 
-def faktorial(x):
-    return round(math.factorial(x), 9)
 
-def nasobenie(x, y):
-    return round(x * y, 9)
+def root(x, y):
+    if x < 0 and y % 2 == 0:
+        raise ValueError
+    if y < 0:
+        raise ValueError
+    if isinstance(y, float):
+        raise ValueError
+    if x < 0 and y % 2 != 0:
+        return -round((-x) ** (1 / y), 5)
+    return round(x**(1/y), 5)
 
-def delenie(x, y):
-    return round(x / y, 9)
 
-def scitanie(x, y):
-    return round(x + y, 9)
+def sin(x):
+    return round(math.sin(x), 5)
 
-def odcitanie(x, y):
-    return round(x - y, 9)
+
+def cos(x):
+    return round(math.cos(x), 5)
+
+
+def tan(x):
+    not_defined = 2*x/math.pi
+    if not_defined.is_integer() and not_defined % 2 != 0:
+        raise ValueError
+    return round(round(math.sin(x), 10)/round(math.cos(x), 10), 5)
+
+
+def log(x):
+    if x <= 0:
+        raise ValueError
+    return round(math.log10(x), 5)
+
+
+def factorial(x):
+    if x < 0:
+        raise ValueError
+    if isinstance(x, float):
+        raise ValueError
+    return round(math.factorial(x), 5)
