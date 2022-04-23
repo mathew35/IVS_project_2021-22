@@ -1,6 +1,7 @@
 import os
 import sys
 import tkinter as tk
+from tkinter import FLAT, RIGHT, N, E, END, Label
 import math_lib
 
 calculation = ""
@@ -9,38 +10,79 @@ calculation = ""
 def add_to_calculation(symbol):
     global calculation
     calculation += str(symbol)
-    text_result.delete(1.0, "end")
-    text_result.insert(1.0, calculation)
+    text_calc.delete(1.0, "end")
+    text_calc.insert(1.0, calculation)
 
 
 def evaluate():
     global calculation
     try:
         calculation = str(eval(calculation))
-        text_result.delete(1.0, "end")
-        text_result.insert(1.0, calculation)
+        text_result.delete(0, END)
+        text_result.insert(0, calculation)
     except:
         clear_all()
-        text_result.insert(1.0, "Error")
+        text_result.insert(0, "Error")
 
 
 def clear_all():
     global calculation
     calculation = ""
-    text_result.delete(1.0, "end")
+    text_calc.delete(1.0, "end")
+    text_result.delete(0, END)
+
 
 def delete_last_char():
     pass
+
+
+def help_info():
+    help_root = tk.Tk()
+    help_root.title('Help')
+
+    root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='icon.png'))
+    help_root.tk.call('wm', 'iconphoto', help_root._w, tk.PhotoImage(file='icon.png'))
+    
+    help_root.geometry()
+    help_root.resizable(0, 0)
+
+    help_1 = Label(help_root, text='sin, cos, tan - sinus/cosine/tangens of number after', font=("Arial", 10))
+    help_1.pack()
+    help_2 = Label(help_root, text='log - logarithm of number after', font=("Arial", 10))
+    help_2.pack()
+    help_3 = Label(help_root, text='x^y - power of number before, number after determines which power ', font=("Arial", 10))
+    help_3.pack()
+    help_4 = Label(help_root, text='x\u221ay - root of number after, number before determines which root', font=("Arial", 10))
+    help_4.pack()
+    help_5 = Label(help_root, text='mod - returns rest after division', font=("Arial", 10))
+    help_5.pack()
+    help_6 = Label(help_root, text='n! - factorial of number before ', font=("Arial", 10))
+    help_6.pack()
+    help_7 = Label(help_root, text='DEL - delete last character', font=("Arial", 10))
+    help_7.pack()
+    help_8 = Label(help_root, text='AC - delete all', font=("Arial", 10))
+    help_8.pack()
+    help_9 = Label(help_root, text='+, -, x, / - plus/minus/multiplication/division', font=("Arial", 10))
+    help_9.pack()
+    help_10 = Label(help_root, text='= - calculates the result ', font=("Arial", 10))
+    help_10.pack()
+    help_root.mainloop()
 
 root = tk.Tk()
 root.title('Calculator')
 root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='icon.png'))
 root.configure(bg="#8f9191")
-root.geometry("363x372")
+root.geometry("370x376")
 root.resizable(0, 0)
 
-text_result = tk.Text(root, height=3, width=20, font=("Arial", 24), fg="black", bg="#17aee2")
-text_result.grid(columnspan=5)
+text_bg = tk.Frame(root, height=3, width=20, bg="#17aee2", relief=FLAT)
+text_bg.grid(row=0, columnspan=5)
+text_calc = tk.Text(text_bg, height=2, width=18, font=("Arial", 24), fg="black", bg="#17aee2", relief=FLAT)
+text_calc.grid(row=0, columnspan=4)
+btn_help = tk.Button(text_bg, text="?", command=lambda: help_info(), width=3, font=("Arial", 14), fg="black", bg="#17aee2", relief=FLAT)
+btn_help.grid(row=0, column=4, sticky=N+E)
+text_result = tk.Entry(text_bg, width=20, font=("Arial", 24), fg="black", bg="#17aee2", relief=FLAT, justify=RIGHT)
+text_result.grid(row=1, columnspan=5)
 
 btn_sin = tk.Button(root, text="sin", command=lambda: add_to_calculation("sin("), width=5, font=("Arial", 14), fg="white", bg="#465657")
 btn_sin.grid(row=4, column=0, padx=0, pady=2)
