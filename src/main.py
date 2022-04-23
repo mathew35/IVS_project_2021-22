@@ -34,7 +34,7 @@ def delete_last_char():
 
 root = tk.Tk()
 root.title('Calculator')
-root.iconbitmap('icon.ico') #todo
+root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='icon.png'))
 root.geometry("363x372")
 root.resizable(0, 0)
 
