@@ -65,7 +65,7 @@ def solve(calc):
                 calc = ['',''] + calc
                 notfound = False
             if calc[i] == '\u221a':
-                calc[i] = str(math_lib.root(float(calc[i - 1]),int(calc[i + 1])))
+                calc[i] = str(math_lib.root(float(calc[i + 1]),int(calc[i - 1])))
                 calc.pop(i + 1)
                 calc.pop(i - 1)
                 calc = ['',''] + calc
