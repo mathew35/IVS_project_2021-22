@@ -33,7 +33,10 @@ def clear_all():
 
 
 def delete_last_char():
-    pass
+    global calculation
+    calculation = calculation[:-1]
+    text_calc.delete(1.0, "end")
+    text_calc.insert(1.0, calculation)
 
 
 def help_info():
@@ -142,7 +145,7 @@ btn_0 = tk.Button(root, text="0", command=lambda: add_to_calculation(0), width=5
 btn_0.grid(row=9, column=1, padx=0, pady=2)
 btn_e = tk.Button(root, text="e", command=lambda: add_to_calculation(math_lib.e), width=5, font=("Arial", 14), fg="white", bg="black")
 btn_e.grid(row=9, column=2, padx=0, pady=2)
-btn_dot = tk.Button(root, text=".", command=lambda: add_to_calculation("x"), width=5, font=("Arial", 14), fg="white", bg="black")
+btn_dot = tk.Button(root, text=".", command=lambda: add_to_calculation("."), width=5, font=("Arial", 14), fg="white", bg="black")
 btn_dot.grid(row=9, column=3, padx=0, pady=2)
 btn_eval = tk.Button(root, text="=", command=evaluate, width=5, font=("Arial", 14), fg="white", bg="#17aee2")
 btn_eval.grid(row=9, column=4, padx=0, pady=2)
