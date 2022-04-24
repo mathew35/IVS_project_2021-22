@@ -153,7 +153,7 @@ def help_info():
     help_root.geometry()
     help_root.resizable(0, 0)
 
-    help_1 = Label(help_root, text='sin, cos, tan - sinus/cosine/tangens of number after', font=("Arial", 10))
+    help_1 = Label(help_root, text='sin, cos, tan - sine/cosine/tangens of number after', font=("Arial", 10))
     help_1.pack()
     help_2 = Label(help_root, text='log - logarithm of number after', font=("Arial", 10))
     help_2.pack()
