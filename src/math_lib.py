@@ -77,8 +77,8 @@ def tan(x):
     not_defined = 2*x/math.pi
     if not_defined.is_integer() and not_defined % 2 != 0:
         raise ValueError
-    return round(round(math.sin(x), 10)/round(math.cos(x), 10), 5)
-
+    return round(math.tan(x),5)
+    
 
 def log(x):
     if x <= 0:
