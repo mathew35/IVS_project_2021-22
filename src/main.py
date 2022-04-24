@@ -37,7 +37,7 @@ def delete_last_char():
 
 
 def help_info():
-    help_root = tk.Tk()
+    help_root = tk.Toplevel()
     help_root.title('Help')
 
     root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='icon.png'))
