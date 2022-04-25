@@ -11,6 +11,8 @@ import math
 # Global Constants
 ## value of Pi
 pi = math.pi
+## value of e
+e = math.e
 
 
 # Functions
