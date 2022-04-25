@@ -1,137 +1,130 @@
+##
+# @file main.py
+# @brief GUI of calculator
+# @author Adrián Matušík
+# @date April 2022
+##
+
+# Imports
 import os
 import sys
 import tkinter as tk
 from tkinter import FLAT, RIGHT, N, E, END, Label
-
 from matplotlib.pyplot import text
 import math_lib
 
 calculation = ""
 
 
+##
+# @brief function for adding pressed symbol into calculated string
+# @param symbol pressed operator/digit
 def add_to_calculation(symbol):
     global calculation
     calculation += str(symbol)
     text_calc.delete(1.0, "end")
     text_calc.insert(1.0, calculation)
 
+
 def solve(calc):
     calc = calc.split()
-    notfound = True;
-    try:
-        for i in range(0, len(calc)):
-            if calc[i] == '(':
-                R_bracket = False
-                for j in range(i+1,len(calc)):
-                    if calc[j] == ')':
-                        calc[i] = solve(' '.join(calc[i+1:j]))
-                        R_bracket = True
-                        for k in range(i,j):
-                            calc.pop(k+1)
-                            calc = [''] + calc
-                        break
-                if not R_bracket:
-                    raise ValueError
-                notfound = False
-        for i in range(0, len(calc)):
-            if calc[i] == 'log(':
-                calc[i] = str(math_lib.log(float(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i + 1)
-                calc = ['',''] + calc
-                notfound = False
-            if calc[i] == 'sin(':
-                calc[i] = str(math_lib.sin(float(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i + 1)
-                calc = ['',''] + calc
-                notfound = False
-            if calc[i] == 'cos(':
-                calc[i] = str(math_lib.cos(float(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i + 1)
-                calc = ['',''] + calc
-                notfound = False
-            if calc[i] == 'tan(':
-                calc[i] = str(math_lib.tan(float(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i + 1)
-                calc = ['',''] + calc
-                notfound = False
-            if calc[i] == '%':
-                calc[i] = str(math_lib.mod(int(calc[i - 1]),int(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i - 1)
-                calc = ['',''] + calc
-                notfound = False
-            if calc[i] == '\u221a':
-                calc[i] = str(math_lib.root(float(calc[i + 1]),int(calc[i - 1])))
-                calc.pop(i + 1)
-                calc.pop(i - 1)
-                calc = ['',''] + calc
-                notfound = False
-            if calc[i] == '^':
-                calc[i] = str(math_lib.pow(float(calc[i - 1]),int(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i - 1)
-                calc = ['',''] + calc
-                notfound = False
-            if calc[i] == '!':
-                calc[i] = str(math_lib.factorial(int(calc[i - 1])))
-                calc.pop(i - 1)
-                calc = [''] + calc
-                notfound = False
-            if calc[i] == '*':
-                calc[i] = str(math_lib.mul(float(calc[i - 1]),float(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i - 1)
-                calc = ['',''] + calc
-                notfound = False
-            if calc[i] == '/':
-                calc[i] = str(math_lib.div(float(calc[i - 1]),float(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i - 1)
-                calc = ['',''] + calc
-                notfound = False
+    for i in range(0, len(calc)):
+        if calc[i] == '(':
+            R_bracket = False
+            for j in range(i+1,len(calc)):
+                if calc[j] == ')':
+                    calc[i] = solve(' '.join(calc[i+1:j]))
+                    R_bracket = True
+                    for k in range(i,j):
+                        calc.pop(k+1)
+                        calc = [''] + calc
+                    break
+            if not R_bracket:
+                raise ValueError
+    for i in range(0, len(calc)):
+        if calc[i] == 'log(':
+            calc[i] = str(math_lib.log(float(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i + 1)
+            calc = ['',''] + calc
+        if calc[i] == 'sin(':
+            calc[i] = str(math_lib.sin(float(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i + 1)
+            calc = ['',''] + calc
+        if calc[i] == 'cos(':
+            calc[i] = str(math_lib.cos(float(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i + 1)
+            calc = ['',''] + calc
+        if calc[i] == 'tan(':
+            calc[i] = str(math_lib.tan(float(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i + 1)
+            calc = ['',''] + calc
+        if calc[i] == '%':
+            calc[i] = str(math_lib.mod(int(calc[i - 1]),int(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i - 1)
+            calc = ['',''] + calc
+        if calc[i] == '\u221a':
+            calc[i] = str(math_lib.root(float(calc[i + 1]),int(calc[i - 1])))
+            calc.pop(i + 1)
+            calc.pop(i - 1)
+            calc = ['',''] + calc
+        if calc[i] == '^':
+            calc[i] = str(math_lib.pow(float(calc[i - 1]),int(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i - 1)
+            calc = ['',''] + calc
+        if calc[i] == '!':
+            calc[i] = str(math_lib.factorial(int(calc[i - 1])))
+            calc.pop(i - 1)
+            calc = [''] + calc
+        if calc[i] == '*':
+            calc[i] = str(math_lib.mul(float(calc[i - 1]),float(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i - 1)
+            calc = ['',''] + calc
+        if calc[i] == '/':
+            calc[i] = str(math_lib.div(float(calc[i - 1]),float(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i - 1)
+            calc = ['',''] + calc
 
-        for i in range(0, len(calc)):
-            if calc[i] == '+':
-                calc[i] = str(math_lib.add(float(calc[i - 1]),float(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i - 1)
-                calc = ['',''] + calc
-                notfound = False
-            if calc[i] == '-':
-                calc[i] = str(math_lib.sub(float(calc[i - 1]),float(calc[i + 1])))
-                calc.pop(i + 1)
-                calc.pop(i - 1)
-                calc = ['',''] + calc
-                notfound = False
-        if notfound:
-            raise ValueError
-        return calc.pop()
-    except ValueError:
-        return False
+    for i in range(0, len(calc)):
+        if calc[i] == '+':
+            calc[i] = str(math_lib.add(float(calc[i - 1]),float(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i - 1)
+            calc = ['',''] + calc
+        if calc[i] == '-':
+            calc[i] = str(math_lib.sub(float(calc[i - 1]),float(calc[i + 1])))
+            calc.pop(i + 1)
+            calc.pop(i - 1)
+            calc = ['',''] + calc
+    return calc.pop()
+
+
+##
+# @brief function for button "=", calculating result or catching exceptions
 def evaluate():
     global calculation
-    calculation = solve(calculation)
-
-    if calculation == False:
-        clear_all()
-        text_result.insert(0, "Error")
-        return
-
-    text_result.delete(0, END)
-    text_result.insert(0, calculation)
-    # try:
-    #     calculation = str(eval(calculation))
-    #     text_result.delete(0, END)
-    #     text_result.insert(0, calculation)
-    # except:
-    #     clear_all()
-    #     text_result.insert(0, "Error")
+    try:
+        calculation = solve(calculation)
+        text_result.delete(0, END)
+        text_result.insert(0, calculation)
+    except ValueError:
+        text_result.delete(0, END)
+        text_result.insert(0, "ValueError")
+    except ZeroDivisionError:
+        text_result.delete(0, END)
+        text_result.insert(0, "ZeroDivisionError")
+    calculation = ""
 
 
+##
+# @brief function for clearing display after pressing AC on calculator
 def clear_all():
     global calculation
     calculation = ""
@@ -139,6 +132,8 @@ def clear_all():
     text_result.delete(0, END)
 
 
+##
+# @brief function for deleting last character after pressing C on calculator
 def delete_last_char():
     global calculation
     calculation = calculation[:-1]
@@ -146,6 +141,8 @@ def delete_last_char():
     text_calc.insert(1.0, calculation)
 
 
+##
+# @brief function for calling guide for our calculator after pressing "?" on calculator
 def help_info():
     help_root = tk.Toplevel()
     help_root.title('Help')
@@ -175,6 +172,8 @@ def help_info():
     help_10.pack()
     help_root.mainloop()
 
+##
+# @brief creating window for calculator and setting up attributes of window
 root = tk.Tk()
 root.title('Calculator')
 root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='icon.png'))
@@ -182,6 +181,8 @@ root.configure(bg="#8f9191")
 root.geometry("370x376")
 root.resizable(0, 0)
 
+##
+# @brief initialization of display
 text_bg = tk.Frame(root, height=3, width=20, bg="#17aee2", relief=FLAT)
 text_bg.grid(row=0, columnspan=5)
 text_calc = tk.Text(text_bg, height=2, width=18, font=("Arial", 24), fg="black", bg="#17aee2", relief=FLAT)
@@ -191,6 +192,8 @@ btn_help.grid(row=0, column=4, sticky=N+E)
 text_result = tk.Entry(text_bg, width=20, font=("Arial", 24), fg="black", bg="#17aee2", relief=FLAT, justify=RIGHT)
 text_result.grid(row=1, columnspan=5)
 
+##
+# @brief initialization of grid with buttons
 btn_sin = tk.Button(root, text="sin", command=lambda: add_to_calculation(" sin( "), width=5, font=("Arial", 14), fg="white", bg="#465657")
 btn_sin.grid(row=4, column=0, padx=0, pady=2)
 btn_cos = tk.Button(root, text="cos", command=lambda: add_to_calculation(" cos( "), width=5, font=("Arial", 14), fg="white", bg="#465657")
