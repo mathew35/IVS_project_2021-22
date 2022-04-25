@@ -42,6 +42,10 @@ def solve(calc):
             if not R_bracket:
                 raise ValueError
     for i in range(0, len(calc)):
+        if calc[i] == '\u03c0':
+            calc[i] = str(math_lib.pi)
+        if calc[i] == 'e':
+            calc[i] = str(math_lib.e)
         if calc[i] == 'log(':
             calc[i] = str(math_lib.log(float(calc[i + 1])))
             calc.pop(i + 1)
@@ -136,7 +140,13 @@ def clear_all():
 # @brief function for deleting last character after pressing C on calculator
 def delete_last_char():
     global calculation
-    calculation = calculation[:-1]
+    if calculation[-1] == ' ':
+        if calculation[-3] == ' ':
+            calculation = calculation[:-3]
+        else:
+            calculation = calculation[:-6]
+    else:
+        calculation = calculation[:-1]
     text_calc.delete(1.0, "end")
     text_calc.insert(1.0, calculation)
 
@@ -249,11 +259,11 @@ btn_plus.grid(row=8, column=3, padx=0, pady=2)
 btn_minus = tk.Button(root, text="-", command=lambda: add_to_calculation(" - "), width=5, font=("Arial", 14), fg="white", bg="black")
 btn_minus.grid(row=8, column=4, padx=0, pady=2)
 
-btn_pi = tk.Button(root, text="PI", command=lambda: add_to_calculation(math_lib.pi), width=5, font=("Arial", 14), fg="white", bg="black")
+btn_pi = tk.Button(root, text="\u03c0", command=lambda: add_to_calculation("\u03c0"), width=5, font=("Arial", 14), fg="white", bg="black")
 btn_pi.grid(row=9, column=0, padx=0, pady=2)
 btn_0 = tk.Button(root, text="0", command=lambda: add_to_calculation(0), width=5, font=("Arial", 14), fg="white", bg="black")
 btn_0.grid(row=9, column=1, padx=0, pady=2)
-btn_e = tk.Button(root, text="e", command=lambda: add_to_calculation(math_lib.e), width=5, font=("Arial", 14), fg="white", bg="black")
+btn_e = tk.Button(root, text="e", command=lambda: add_to_calculation("e"), width=5, font=("Arial", 14), fg="white", bg="black")
 btn_e.grid(row=9, column=2, padx=0, pady=2)
 btn_dot = tk.Button(root, text=".", command=lambda: add_to_calculation("."), width=5, font=("Arial", 14), fg="white", bg="black")
 btn_dot.grid(row=9, column=3, padx=0, pady=2)
