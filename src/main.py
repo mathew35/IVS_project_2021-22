@@ -12,6 +12,7 @@ import tkinter as tk
 from tkinter import FLAT, RIGHT, N, E, END, Label
 from matplotlib.pyplot import text
 import math_lib
+import re
 
 calculation = ""
 
@@ -31,6 +32,16 @@ def add_to_calculation(symbol):
 # @param calc equation to evaluate
 def solve(calc):
     calc = calc.split()
+    for i in range(0,len(calc)):
+        if calc[i] == '-':
+            if i-1 < 0 or not re.search('[0-9|)]', calc[i - 1]):
+                if re.search('[0-9]', calc[i + 1]):
+                    calc[i]=calc[i]+calc[i+1]
+                    calc.pop(i + 1)
+                    calc = [''] + calc
+                elif re.search('[sin|cos|tan|log|%|(]', calc[i + 1]):
+                    calc.insert(i,'0')
+                    i += 1
     for i in range(0, len(calc)):
         if calc[i] == '(':
             R_bracket = False
@@ -53,19 +64,19 @@ def solve(calc):
         if calc[i] == 'log':
             calc[i] = str(math_lib.log(float(calc[i + 1])))
             calc.pop(i + 1)
-            calc = ['', ''] + calc
+            calc = [''] + calc
         if calc[i] == 'sin':
             calc[i] = str(math_lib.sin(float(calc[i + 1])))
             calc.pop(i + 1)
-            calc = ['', ''] + calc
+            calc = [''] + calc
         if calc[i] == 'cos':
             calc[i] = str(math_lib.cos(float(calc[i + 1])))
             calc.pop(i + 1)
-            calc = ['', ''] + calc
+            calc = [''] + calc
         if calc[i] == 'tan':
             calc[i] = str(math_lib.tan(float(calc[i + 1])))
             calc.pop(i + 1)
-            calc = ['', ''] + calc
+            calc = [''] + calc
         if calc[i] == '%':
             calc[i] = str(math_lib.mod(int(calc[i - 1]), int(calc[i + 1])))
             calc.pop(i + 1)
