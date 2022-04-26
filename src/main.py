@@ -146,6 +146,7 @@ def evaluate():
     text_calc.config(state='disabled')
     text_result.config(state='readonly')
 
+
 ##
 # @brief function for clearing display after pressing AC on calculator
 def clear_all():
@@ -157,6 +158,7 @@ def clear_all():
     text_result.delete(0, END)
     text_calc.config(state='disabled')
     text_result.config(state='readonly')
+
 
 ##
 # @brief function for deleting last character after pressing C on calculator
@@ -173,6 +175,7 @@ def delete_last_char():
     text_calc.delete(1.0, "end")
     text_calc.insert(1.0, calculation)
     text_calc.config(state='disabled')
+
 
 ##
 # @brief function for calling guide for our calculator after pressing "?" on calculator
@@ -205,6 +208,18 @@ def help_info():
     help_10.pack()
     help_root.mainloop()
 
+
+##
+# @brief function implementing keyboard input
+def keydown(ch):
+    if re.search('[0-9]', ch.char):
+        add_to_calculation(ch.char)
+    if re.search('[+|\-|*|/]', ch.char):
+        add_to_calculation(' ' + ch.char + ' ')
+    if re.search('\r', ch.char):
+        evaluate()
+
+        
 ##
 # @brief creating window for calculator and setting up attributes of window
 root = tk.Tk()
@@ -213,6 +228,8 @@ root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='icon.png'))
 root.configure(bg="#8f9191")
 root.geometry("370x376")
 root.resizable(0, 0)
+os.system('xset r off')
+root.bind("<KeyPress>", keydown)
 
 ##
 # @brief initialization of display
@@ -224,7 +241,6 @@ btn_help = tk.Button(text_bg, text="?", command=lambda: help_info(), width=3, fo
 btn_help.grid(row=0, column=4, sticky=N+E)
 text_result = tk.Entry(text_bg, width=20, font=("Arial", 24), fg="black", bg="#17aee2", relief=FLAT, justify=RIGHT, state='readonly', readonlybackground="#17aee2")
 text_result.grid(row=1, columnspan=5)
-
 
 ##
 # @brief initialization of grid with buttons
