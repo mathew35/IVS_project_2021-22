@@ -9,7 +9,7 @@
 import os
 import sys
 import tkinter as tk
-from tkinter import FLAT, RIGHT, N, E, END, Label
+from tkinter import FLAT, N, E, Label, RIGHT, END
 from matplotlib.pyplot import text
 import math_lib
 import re
@@ -23,8 +23,10 @@ calculation = ""
 def add_to_calculation(symbol):
     global calculation
     calculation += str(symbol)
+    text_calc.config(state='normal')
     text_calc.delete(1.0, "end")
     text_calc.insert(1.0, calculation)
+    text_calc.config(state='disabled')
 
 
 ##
@@ -125,6 +127,8 @@ def solve(calc):
 # @brief function for button "=", calculating result or catching exceptions
 def evaluate():
     global calculation
+    text_calc.config(state='normal')
+    text_result.config(state='normal')
     try:
         calculation = solve(calculation)
         text_result.delete(0, END)
@@ -139,16 +143,20 @@ def evaluate():
         text_result.delete(0, END)
         text_result.insert(0, "MissingRightBracket")
     calculation = ""
-
+    text_calc.config(state='disabled')
+    text_result.config(state='readonly')
 
 ##
 # @brief function for clearing display after pressing AC on calculator
 def clear_all():
     global calculation
     calculation = ""
+    text_calc.config(state='normal')
+    text_result.config(state='normal')
     text_calc.delete(1.0, "end")
     text_result.delete(0, END)
-
+    text_calc.config(state='disabled')
+    text_result.config(state='readonly')
 
 ##
 # @brief function for deleting last character after pressing C on calculator
@@ -161,9 +169,10 @@ def delete_last_char():
             calculation = calculation[:-5]
     else:
         calculation = calculation[:-1]
+    text_calc.config(state='normal')
     text_calc.delete(1.0, "end")
     text_calc.insert(1.0, calculation)
-
+    text_calc.config(state='disabled')
 
 ##
 # @brief function for calling guide for our calculator after pressing "?" on calculator
@@ -209,12 +218,13 @@ root.resizable(0, 0)
 # @brief initialization of display
 text_bg = tk.Frame(root, height=3, width=20, bg="#17aee2", relief=FLAT)
 text_bg.grid(row=0, columnspan=5)
-text_calc = tk.Text(text_bg, height=2, width=18, font=("Arial", 24), fg="black", bg="#17aee2", relief=FLAT)
+text_calc = tk.Text(text_bg, height=2, width=18, font=("Arial", 24), fg="black", bg="#17aee2", relief=FLAT, state='disabled')
 text_calc.grid(row=0, columnspan=4)
 btn_help = tk.Button(text_bg, text="?", command=lambda: help_info(), width=3, font=("Arial", 14), fg="black", bg="#17aee2", relief=FLAT)
 btn_help.grid(row=0, column=4, sticky=N+E)
-text_result = tk.Entry(text_bg, width=20, font=("Arial", 24), fg="black", bg="#17aee2", relief=FLAT, justify=RIGHT)
+text_result = tk.Entry(text_bg, width=20, font=("Arial", 24), fg="black", bg="#17aee2", relief=FLAT, justify=RIGHT, state='readonly', readonlybackground="#17aee2")
 text_result.grid(row=1, columnspan=5)
+
 
 ##
 # @brief initialization of grid with buttons
