@@ -1,5 +1,19 @@
+##
+# @file profiling.py
+# @brief skript for profiling measures
+# @author Matúš Vráblik
+# @date April 2022
+##
+
+# Imports
+from sys import stderr
 import math_lib as ml
 import cProfile
+
+
+##
+# @brief function using all functions from math_lib
+# @param FILE file filled with values for math_lib functions
 def func(FILE):
     sum = 0
     subtr = 0
