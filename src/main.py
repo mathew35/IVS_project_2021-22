@@ -49,6 +49,7 @@ def solve(calc):
             calc[i] = str(math_lib.pi)
         if calc[i] == 'e':
             calc[i] = str(math_lib.e)
+    for i in range(0, len(calc)):
         if calc[i] == 'log(':
             calc[i] = str(math_lib.log(float(calc[i + 1])))
             calc.pop(i + 1)
