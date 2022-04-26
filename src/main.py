@@ -26,6 +26,9 @@ def add_to_calculation(symbol):
     text_calc.insert(1.0, calculation)
 
 
+##
+# @brief function for calculating result or throws errors
+# @param calc equation to evaluate
 def solve(calc):
     calc = calc.split()
     for i in range(0, len(calc)):
