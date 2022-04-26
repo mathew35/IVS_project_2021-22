@@ -34,83 +34,79 @@ def solve(calc):
     for i in range(0, len(calc)):
         if calc[i] == '(':
             R_bracket = False
-            for j in range(i+1,len(calc)):
+            for j in range(i+1, len(calc)):
                 if calc[j] == ')':
                     calc[i] = solve(' '.join(calc[i+1:j]))
                     R_bracket = True
-                    for k in range(i,j):
+                    for k in range(i, j):
                         calc.pop(k+1)
                         calc = [''] + calc
                     break
             if not R_bracket:
-                raise ValueError
+                raise SyntaxError
     for i in range(0, len(calc)):
         if calc[i] == '\u03c0':
             calc[i] = str(math_lib.pi)
         if calc[i] == 'e':
             calc[i] = str(math_lib.e)
     for i in range(0, len(calc)):
-        if calc[i] == 'log(':
+        if calc[i] == 'log':
             calc[i] = str(math_lib.log(float(calc[i + 1])))
             calc.pop(i + 1)
-            calc.pop(i + 1)
-            calc = ['',''] + calc
-        if calc[i] == 'sin(':
+            calc = ['', ''] + calc
+        if calc[i] == 'sin':
             calc[i] = str(math_lib.sin(float(calc[i + 1])))
             calc.pop(i + 1)
-            calc.pop(i + 1)
-            calc = ['',''] + calc
-        if calc[i] == 'cos(':
+            calc = ['', ''] + calc
+        if calc[i] == 'cos':
             calc[i] = str(math_lib.cos(float(calc[i + 1])))
             calc.pop(i + 1)
-            calc.pop(i + 1)
-            calc = ['',''] + calc
-        if calc[i] == 'tan(':
+            calc = ['', ''] + calc
+        if calc[i] == 'tan':
             calc[i] = str(math_lib.tan(float(calc[i + 1])))
             calc.pop(i + 1)
-            calc.pop(i + 1)
-            calc = ['',''] + calc
+            calc = ['', ''] + calc
         if calc[i] == '%':
-            calc[i] = str(math_lib.mod(int(calc[i - 1]),int(calc[i + 1])))
+            calc[i] = str(math_lib.mod(int(calc[i - 1]), int(calc[i + 1])))
             calc.pop(i + 1)
             calc.pop(i - 1)
-            calc = ['',''] + calc
+            calc = ['', ''] + calc
         if calc[i] == '\u221a':
-            calc[i] = str(math_lib.root(float(calc[i + 1]),int(calc[i - 1])))
+            calc[i] = str(math_lib.root(float(calc[i + 1]), int(calc[i - 1])))
             calc.pop(i + 1)
             calc.pop(i - 1)
-            calc = ['',''] + calc
+            calc = ['', ''] + calc
         if calc[i] == '^':
-            calc[i] = str(math_lib.pow(float(calc[i - 1]),int(calc[i + 1])))
+            calc[i] = str(math_lib.pow(float(calc[i - 1]), int(calc[i + 1])))
             calc.pop(i + 1)
             calc.pop(i - 1)
-            calc = ['',''] + calc
+            calc = ['', ''] + calc
         if calc[i] == '!':
             calc[i] = str(math_lib.factorial(int(calc[i - 1])))
             calc.pop(i - 1)
             calc = [''] + calc
         if calc[i] == '*':
-            calc[i] = str(math_lib.mul(float(calc[i - 1]),float(calc[i + 1])))
+            calc[i] = str(math_lib.mul(float(calc[i - 1]), float(calc[i + 1])))
             calc.pop(i + 1)
             calc.pop(i - 1)
-            calc = ['',''] + calc
+            calc = ['', ''] + calc
         if calc[i] == '/':
-            calc[i] = str(math_lib.div(float(calc[i - 1]),float(calc[i + 1])))
+            calc[i] = str(math_lib.div(float(calc[i - 1]), float(calc[i + 1])))
             calc.pop(i + 1)
             calc.pop(i - 1)
-            calc = ['',''] + calc
+            calc = ['', ''] + calc
 
     for i in range(0, len(calc)):
         if calc[i] == '+':
-            calc[i] = str(math_lib.add(float(calc[i - 1]),float(calc[i + 1])))
+            calc[i] = str(math_lib.add(float(calc[i - 1]), float(calc[i + 1])))
             calc.pop(i + 1)
             calc.pop(i - 1)
-            calc = ['',''] + calc
+            calc = ['', ''] + calc
         if calc[i] == '-':
-            calc[i] = str(math_lib.sub(float(calc[i - 1]),float(calc[i + 1])))
+            calc[i] = str(math_lib.sub(float(calc[i - 1]), float(calc[i + 1])))
             calc.pop(i + 1)
             calc.pop(i - 1)
-            calc = ['',''] + calc
+            calc = ['', ''] + calc
     return calc.pop()
 
 
@@ -127,7 +123,10 @@ def evaluate():
         text_result.insert(0, "ValueError")
     except ZeroDivisionError:
         text_result.delete(0, END)
-        text_result.insert(0, "ZeroDivisionError")
+        text_result.insert(0, "ZeroDivision")
+    except SyntaxError:
+        text_result.delete(0, END)
+        text_result.insert(0, "MissingRightBracket")
     calculation = ""
 
 
@@ -148,7 +147,7 @@ def delete_last_char():
         if calculation[-3] == ' ':
             calculation = calculation[:-3]
         else:
-            calculation = calculation[:-6]
+            calculation = calculation[:-5]
     else:
         calculation = calculation[:-1]
     text_calc.delete(1.0, "end")
@@ -208,13 +207,13 @@ text_result.grid(row=1, columnspan=5)
 
 ##
 # @brief initialization of grid with buttons
-btn_sin = tk.Button(root, text="sin", command=lambda: add_to_calculation(" sin( "), width=5, font=("Arial", 14), fg="white", bg="#465657")
+btn_sin = tk.Button(root, text="sin", command=lambda: add_to_calculation(" sin "), width=5, font=("Arial", 14), fg="white", bg="#465657")
 btn_sin.grid(row=4, column=0, padx=0, pady=2)
-btn_cos = tk.Button(root, text="cos", command=lambda: add_to_calculation(" cos( "), width=5, font=("Arial", 14), fg="white", bg="#465657")
+btn_cos = tk.Button(root, text="cos", command=lambda: add_to_calculation(" cos "), width=5, font=("Arial", 14), fg="white", bg="#465657")
 btn_cos.grid(row=4, column=1, padx=0, pady=2)
-btn_tan = tk.Button(root, text="tan", command=lambda: add_to_calculation(" tan( "), width=5, font=("Arial", 14), fg="white", bg="#465657")
+btn_tan = tk.Button(root, text="tan", command=lambda: add_to_calculation(" tan "), width=5, font=("Arial", 14), fg="white", bg="#465657")
 btn_tan.grid(row=4, column=2, padx=0, pady=2)
-btn_log = tk.Button(root, text="log", command=lambda: add_to_calculation(" log( "), width=5, font=("Arial", 14), fg="white", bg="#465657")
+btn_log = tk.Button(root, text="log", command=lambda: add_to_calculation(" log "), width=5, font=("Arial", 14), fg="white", bg="#465657")
 btn_log.grid(row=4, column=3, padx=0, pady=2)
 btn_x2 = tk.Button(root, text="x ^ y", command=lambda: add_to_calculation(" ^ "), width=5, font=("Arial", 14), fg="white", bg="#465657")
 btn_x2.grid(row=4, column=4, padx=0, pady=2)
