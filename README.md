@@ -3,7 +3,15 @@
 Platforms
 ---------
 
-Windows 64bit
+    Ubuntu 64bit
+
+Requirements
+---------
+
+    - Python3
+    - pip3
+    - Doxygen
+    - make
 
 Authors
 ------
@@ -19,4 +27,4 @@ To je jedno
 License
 -------
 
-Tento program je poskytovaný pod GNU General Public Licence v3.0.
+    This program is distributed under GNU General Public Licence v3.0.

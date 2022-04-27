@@ -218,6 +218,10 @@ def keydown(ch):
         add_to_calculation(' ' + ch.char + ' ')
     if re.search('\r', ch.char):
         evaluate()
+    if re.search('\.', ch.char):
+        add_to_calculation(ch.char)
+    if re.search('\x08', ch.char):
+        delete_last_char()
 
         
 ##
