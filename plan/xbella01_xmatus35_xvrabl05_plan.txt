@@ -37,9 +37,9 @@
 
 	všetci: 
 		- Mockup GUI
-	     	- Dokumentácia
-	     	- Code review
-	     	- Plánovanie projektu, návrhy
+	    - Dokumentácia
+	    - Code review
+	    - Plánovanie projektu, návrhy
 		- Obhajoba projektu
 
 3. Komunikácia
