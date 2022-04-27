@@ -22,7 +22,7 @@ pack: doc installer clean
 	mkdir -p ../../$(ZIP)/repo
 
 	cp -r ../ ../../$(ZIP)/repo
-#	mv ../../$(ZIP)/repo/installer ../../$(ZIP)
+	mv ../../$(ZIP)/repo/installer ../../$(ZIP)
 	mv ../../$(ZIP)/repo/doc ../../$(ZIP)
 	
 	cd ../../ && zip -r $(ZIP).zip $(ZIP)
