@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 ##
 # @file main.py
 # @brief GUI of calculator
