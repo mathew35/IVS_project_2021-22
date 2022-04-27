@@ -180,7 +180,7 @@ def delete_last_char():
 def help_info():
     help_root = tk.Toplevel()
     help_root.title('Help')
-    help_root.tk.call('wm', 'iconphoto', help_root._w, tk.PhotoImage(file='icon.png'))
+    help_root.tk.call('wm', 'iconphoto', help_root._w, tk.PhotoImage(file='/usr/share/app-install/icons/toJeJedno/icon.png'))
     help_root.geometry()
     help_root.resizable(0, 0)
 
@@ -226,7 +226,7 @@ def keydown(ch):
 # @brief creating window for calculator and setting up attributes of window
 root = tk.Tk()
 root.title('Calculator')
-root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='icon.png'))
+root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='/usr/share/app-install/icons/toJeJedno/icon.png'))
 root.configure(bg="#8f9191")
 root.geometry("380x348")
 root.resizable(0, 0)
