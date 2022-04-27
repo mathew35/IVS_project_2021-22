@@ -45,13 +45,17 @@ profile: $(PROFILING)
 
 installer: 
 	mkdir -p ../installer/usr/share/toJeJedno 2>/dev/null
-	cp  $(MAIN) ../installer/usr/share/toJeJedno/$(MAIN) && chmod +x ../installer/usr/share/toJeJedno/$(MAIN)
-	cp  $(MATH_LIB) ../installer/usr/share/toJeJedno/$(MATH_LIB)
+	cp $(MAIN) ../installer/usr/share/toJeJedno/$(MAIN) && chmod +x ../installer/usr/share/toJeJedno/$(MAIN)
+	cp $(MATH_LIB) ../installer/usr/share/toJeJedno/$(MATH_LIB)
+	mkdir -p ../installer/usr/share/app-install/icons/toJeJedno
+	cp icon.png ../installer/usr/share/app-install/icons/toJeJedno
 	mkdir -p ../installer/usr/local/bin 2>/dev/null
-	ln -sf /usr/share/toJeJedno/$(MAIN) ../installer/usr/local/bin/Calcolator
+	ln -sf /usr/share/toJeJedno/$(MAIN) ../installer/usr/local/bin/Calculator
 	mkdir -p ../installer/tmp 2>/dev/null
 	cp requirements.txt ../installer/tmp/requirements.txt
 	mkdir -p ../installer/DEBIAN
-	echo "python3 -m pip install -r $(REQUIREMENTS)" > ../installer/DEBIAN/postinst
-	chmod +x ../installer/DEBIAN/postinst
-	dpkg-deb --build ../installer/ ../installer/Calcolator.deb
+	chmod 755 ../installer/DEBIAN
+	echo "sudo apt-get install python3-pip" > ../installer/DEBIAN/postinst
+	echo "python3 -m pip install -r ../tmp/$(REQUIREMENTS)" >> ../installer/DEBIAN/postinst
+	chmod 755 ../installer/DEBIAN/postinst
+	dpkg-deb --build ../installer/ ../installer/Calculator.deb
