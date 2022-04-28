@@ -6,7 +6,6 @@
 ##
 
 # Imports
-from sys import stderr
 import math_lib as ml
 import cProfile
 

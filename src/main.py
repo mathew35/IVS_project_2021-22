@@ -7,15 +7,17 @@
 ##
 
 # Imports
-import os
 import tkinter as tk
 from tkinter import FLAT, N, E, Label, RIGHT, END
 import math_lib
 import re
 
 calculation = ""
-
-
+icon = '/usr/share/app-install/icons/toJeJedno/icon.png'
+try:
+    open(icon)
+except:
+    icon = 'icon.png'
 ##
 # @brief function for adding pressed symbol into calculated string
 # @param symbol pressed operator/digit
@@ -181,7 +183,7 @@ def delete_last_char():
 def help_info():
     help_root = tk.Toplevel()
     help_root.title('Help')
-    help_root.tk.call('wm', 'iconphoto', help_root._w, tk.PhotoImage(file='/usr/share/app-install/icons/toJeJedno/icon.png'))
+    help_root.tk.call('wm', 'iconphoto', help_root._w, tk.PhotoImage(file=icon))
     help_root.geometry()
     help_root.resizable(0, 0)
 
@@ -227,7 +229,7 @@ def keydown(ch):
 # @brief creating window for calculator and setting up attributes of window
 root = tk.Tk()
 root.title('Calculator')
-root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='/usr/share/app-install/icons/toJeJedno/icon.png'))
+root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file=icon))
 root.configure(bg="#8f9191")
 root.geometry("380x348")
 root.resizable(0, 0)
