@@ -5,14 +5,6 @@ Platforms
 
     Ubuntu 64bit
 
-Requirements
----------
-
-    - Python3
-    - pip3
-    - Doxygen
-    - make
-
 Authors
 ------
 
