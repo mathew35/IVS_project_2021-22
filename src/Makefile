@@ -11,6 +11,7 @@ ZIP=xbella01_xmatus35_xvrabl05
 	test
 	doc
 	clean
+	requirements
 	run
 	profile
 all: requirements run
