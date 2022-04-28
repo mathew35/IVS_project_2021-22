@@ -231,7 +231,6 @@ root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='/usr/share/app-inst
 root.configure(bg="#8f9191")
 root.geometry("380x348")
 root.resizable(0, 0)
-os.system('xset r off')
 root.bind("<KeyPress>", keydown)
 
 ##
