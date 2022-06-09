@@ -1,6 +1,6 @@
 MAIN=main.py
 MATH_LIB=math_lib.py
-MATH_TESTS=math_lib_tests.py
+MATH_TESTS=math_lib_test.py
 PROFILING=profiling.py
 REQUIREMENTS=requirements.txt
 ZIP=xbella01_xmatus35_xvrabl05
@@ -30,7 +30,8 @@ pack: doc installer clean
 	rm -rf ../../$(ZIP)
 
 clean:
-	rm -rf __pycache__	
+	rm -rf __pycache__
+	rm -rf .pytest_cache	
 #TODO
 test: $(MATH_TESTS)
 	python3 -m pytest $(MATH_TESTS)
